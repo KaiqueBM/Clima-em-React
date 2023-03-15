@@ -2,6 +2,20 @@ import "./App.css";
 import api from "./axios/api";
 import React, { useEffect, useState } from "react";
 
+import clouds from "./assets/clouds.svg";
+import leaf from "./assets/leaf.svg";
+import pin from "./assets/pin.svg";
+import sunChart from "./assets/sun-chart.svg";
+import sunTime from "./assets/sun-time.svg";
+import tempHumidity from "./assets/temp-humidity.svg";
+import tempRain from "./assets/temp-rain.svg";
+import tempWind from "./assets/temp-wind.svg";
+import weatherClouds from "./assets/weather-clouds.svg";
+import weatherCloudy from "./assets/weather-cloudy.svg";
+import weatherRain from "./assets/weather-rain.svg";
+import weatherSun from "./assets/weather-sun.svg";
+import weatherThunder from "./assets/weather-thunder.svg";
+
 function App() {
   const [clima, setClima] = useState();
 
@@ -23,8 +37,8 @@ function App() {
       <main>
         <section className="temperature-now">
           <div className="location">
-            <img src="./assets/pin.svg" alt="icone de localizacao" />
-            <strong>Rio do Sul, SC</strong>
+            <img src={pin} alt="icone de localizacao" />
+            <strong>São Paulo, SP</strong>
           </div>
           <div className="temp">
             <div className="number">
@@ -37,7 +51,7 @@ function App() {
           </div>
           <div className="statistics">
             <div className="stats">
-              <img src="./assets/temp-wind.svg" alt="icone de vento" />
+              <img src={tempWind} alt="icone de vento" />
               <div className="info">
                 <p>Vento</p>
                 <h5>
@@ -46,7 +60,7 @@ function App() {
               </div>
             </div>
             <div className="stats">
-              <img src="./assets/temp-humidity.svg" alt="icone de umidade" />
+              <img src={tempHumidity} alt="icone de umidade" />
               <div className="info">
                 <p>Umidade</p>
                 <h5>
@@ -55,7 +69,7 @@ function App() {
               </div>
             </div>
             <div className="stats">
-              <img src="./assets/temp-rain.svg" alt="icone de chuva" />
+              <img src={tempRain} alt="icone de chuva" />
               <div className="info">
                 <p>Chuva</p>
                 <h5>
@@ -68,7 +82,7 @@ function App() {
 
         <section className="air-quality">
           <h2 className="title">
-            <img src="./assets/leaf.svg" alt="icone de folha de árvore" />
+            <img src={leaf} alt="icone de folha de árvore" />
             Qualidade do ar
           </h2>
 
@@ -105,17 +119,14 @@ function App() {
 
         <section className="sun-time">
           <h2 className="title">
-            <img
-              src="./assets/sun-time.svg"
-              alt="icone de um sol com um relógio dentro"
-            />
+            <img src={sunTime} alt="icone de um sol com um relógio dentro" />
             Horário do sol
           </h2>
           <div className="sun-chart-wrapper">
             <div className="sun-chart">
               <div className="chart">
                 <img
-                  src="./assets/sun-chart.svg"
+                  src={sunChart}
                   alt="imagem de um gráfico semi circulo com traços"
                 />
               </div>
@@ -131,7 +142,7 @@ function App() {
         <section className="week-weather">
           <div className="day">
             <h4 className="title">Amanhã</h4>
-            <img src="./assets/weather-clouds.svg" alt="" />
+            <img src={weatherClouds} alt="" />
             <p className="maxmin">
               21° <span>16°</span>
             </p>
@@ -139,7 +150,7 @@ function App() {
 
           <div className="day">
             <h4 className="title">Sexta</h4>
-            <img src="./assets/weather-sun.svg" alt="" />
+            <img src={weatherSun} alt="" />
             <p className="maxmin">
               28° <span>16°</span>
             </p>
@@ -147,7 +158,7 @@ function App() {
 
           <div className="day">
             <h4 className="title">Sábado</h4>
-            <img src="./assets/weather-rain.svg" alt="" />
+            <img src={weatherRain} alt="" />
             <p className="maxmin">
               20° <span>16°</span>
             </p>
@@ -155,7 +166,7 @@ function App() {
 
           <div className="day">
             <h4 className="title">Domingo</h4>
-            <img src="./assets/weather-thunder.svg" alt="" />
+            <img src={weatherThunder} alt="" />
             <p className="maxmin">
               28° <span>26°</span>
             </p>
@@ -163,7 +174,7 @@ function App() {
 
           <div className="day">
             <h4 className="title">Segunda</h4>
-            <img src="./assets/weather-cloudy.svg" alt="" />
+            <img src={weatherCloudy} alt="" />
             <p className="maxmin">
               26° <span>20°</span>
             </p>
