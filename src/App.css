@@ -30,18 +30,62 @@ section {
   border-radius: 1rem;
 }
 
-.temperature-now {
+.temperature-now-0,
+.temperature-now-3,
+.temperature-now-48,
+.temperature-now-77,
+.temperature-now-99 {
   background: url(./assets/bg-temp-now.jpeg);
   position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
 }
 
-.temperature-now::before {
+.temperature-now-0::before {
+  content: "";
+  width: 17.6rem;
+  height: 17.6rem;
+  background: url(./assets/sun.svg) no-repeat;
+  position: absolute;
+  top: -5.6rem;
+  left: -5.6rem;
+}
+
+.temperature-now-3::before {
+  content: "";
+  width: 17.6rem;
+  height: 17.6rem;
+  background: url(./assets/cloudy.svg) no-repeat;
+  position: absolute;
+  top: -5.6rem;
+  left: -5.6rem;
+}
+
+.temperature-now-48::before {
   content: "";
   width: 17.6rem;
   height: 17.6rem;
   background: url(./assets/clouds.svg) no-repeat;
+  position: absolute;
+  top: -5.6rem;
+  left: -5.6rem;
+}
+
+.temperature-now-77::before {
+  content: "";
+  width: 17.6rem;
+  height: 17.6rem;
+  background: url(./assets/rain.svg) no-repeat;
+  position: absolute;
+  top: -5.6rem;
+  left: -5.6rem;
+}
+
+.temperature-now-99::before {
+  content: "";
+  width: 17.6rem;
+  height: 17.6rem;
+  background: url(./assets/thunder.svg) no-repeat;
   position: absolute;
   top: -5.6rem;
   left: -5.6rem;
@@ -288,7 +332,11 @@ h4.title {
     grid-template-columns: 48rem 27.7rem 27.7rem;
     grid-template-rows: 24.4rem 21.2rem;
   }
-  .temperature-now {
+  .temperature-now-0,
+  .temperature-now-3,
+  .temperature-now-48,
+  .temperature-now-77,
+  .temperature-now-99 {
     grid-row: 1/3;
   }
   .week-weather {
