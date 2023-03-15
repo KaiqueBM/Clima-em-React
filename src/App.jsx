@@ -1,6 +1,23 @@
 import "./App.css";
+import api from "./axios/api";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [clima, setClima] = useState();
+
+  useEffect(() => {
+    api
+      .get(
+        "hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_180m&timezone=America/Fortaleza&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset"
+      )
+      .then((response) => setClima(response.data))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+  }, []);
+
+  console.log(clima);
+
   return (
     <div className="App">
       <main>
