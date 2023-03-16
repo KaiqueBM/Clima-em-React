@@ -226,7 +226,7 @@ h2.title {
 }
 
 .sun-chart {
-  --pos-x: 75;
+  --pos-x: 50;
   margin: auto;
   width: 21.6rem;
   height: 21.6rem;

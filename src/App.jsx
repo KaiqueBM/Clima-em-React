@@ -1,6 +1,7 @@
 import "./App.css";
 import api from "./axios/api";
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 import clouds from "./assets/clouds.svg";
 import leaf from "./assets/leaf.svg";
@@ -49,11 +50,28 @@ function App() {
   useEffect(() => {
     let secTimer = setInterval(() => {
       const now = new Date();
-      setHoursAndMinutes(now.getHours() + ":" + now.getMinutes());
+      setHoursAndMinutes(
+        dayjs()
+          .set("hour", now.getHours())
+          .set("minute", now.getMinutes())
+          .format("HH:mm")
+      );
     }, 1000);
 
     return () => clearInterval(secTimer);
   }, []);
+
+  function sunChartPosition() {
+    const hoursAndMinutesFormat = hoursAndMinutes.split(":");
+    let minutesFormat =
+      (hoursAndMinutesFormat[0] + hoursAndMinutesFormat[1]) * 60;
+    const sunriseInMinutes = 600 * 60;
+    let sunsetInMinutes = 1825 * 60;
+    minutesFormat -= sunriseInMinutes;
+    sunsetInMinutes -= sunriseInMinutes;
+    const sunChart = Math.round((sunriseInMinutes / sunsetInMinutes) * 100);
+    return sunChart;
+  }
 
   return (
     <div className="App">
@@ -158,7 +176,10 @@ function App() {
               Horário do sol
             </h2>
             <div className="sun-chart-wrapper">
-              <div className="sun-chart">
+              <div
+                className="sun-chart"
+                style={{ "--pos-x": sunChartPosition() }}
+              >
                 <div className="chart">
                   <img
                     src={sunChart}
