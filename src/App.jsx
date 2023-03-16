@@ -32,6 +32,29 @@ function App() {
 
   console.log(clima);
 
+  function setSunrise(sunrise) {
+    const sunriseHour = sunrise[0].split("T");
+    return sunriseHour[1];
+  }
+
+  function setSunset(sunset) {
+    const sunsetHour = sunset[0].split("T");
+    return sunsetHour[1];
+  }
+
+  const [hoursAndMinutes, setHoursAndMinutes] = useState(
+    new Date().toLocaleString()
+  );
+
+  useEffect(() => {
+    let secTimer = setInterval(() => {
+      const now = new Date();
+      setHoursAndMinutes(now.getHours() + ":" + now.getMinutes());
+    }, 1000);
+
+    return () => clearInterval(secTimer);
+  }, []);
+
   return (
     <div className="App">
       {!clima ? (
@@ -142,12 +165,12 @@ function App() {
                     alt="imagem de um gráfico semi circulo com traços"
                   />
                 </div>
-                <time className="now">17:48</time>
+                <time className="now">{hoursAndMinutes}</time>
               </div>
             </div>
             <div className="time">
-              <time className="sunrise">06:00</time>
-              <time className="sunset">18:52</time>
+              <time className="sunrise">{setSunrise(clima.daily.sunrise)}</time>
+              <time className="sunset">{setSunset(clima.daily.sunset)}</time>
             </div>
           </section>
 
