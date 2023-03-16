@@ -69,7 +69,7 @@ function App() {
     let sunsetInMinutes = 1825 * 60;
     minutesFormat -= sunriseInMinutes;
     sunsetInMinutes -= sunriseInMinutes;
-    const sunChart = Math.round((sunriseInMinutes / sunsetInMinutes) * 100);
+    const sunChart = Math.round((minutesFormat / sunsetInMinutes) * 100);
     return sunChart;
   }
 
