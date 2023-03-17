@@ -17,6 +17,16 @@ import weatherRain from "./assets/weather-rain.svg";
 import weatherSun from "./assets/weather-sun.svg";
 import weatherThunder from "./assets/weather-thunder.svg";
 
+const daysOfTheWeek = [
+  "Domingo",
+  "Segunda",
+  "Terça",
+  "Quarta",
+  "Quinta",
+  "Sexta",
+  "Sábado",
+];
+
 function App() {
   const [clima, setClima] = useState();
 
@@ -72,6 +82,8 @@ function App() {
     const sunChart = Math.round((minutesFormat / sunsetInMinutes) * 100);
     return sunChart;
   }
+  const now = new Date();
+  const dayOfTheWeekToday = now.getDay();
 
   return (
     <div className="App">
@@ -200,23 +212,6 @@ function App() {
               <h4 className="title">Amanhã</h4>
               <img
                 src={
-                  (clima.daily.weathercode[0] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[0] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[0] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[0] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[0] <= 99 && weatherThunder)
-                }
-                alt=""
-              />
-              <p className="maxmin">
-                21° <span>16°</span>
-              </p>
-            </div>
-
-            <div className="day">
-              <h4 className="title">Sexta</h4>
-              <img
-                src={
                   (clima.daily.weathercode[1] === 0 && { weatherSun }) ||
                   (clima.daily.weathercode[1] <= 3 && weatherCloudy) ||
                   (clima.daily.weathercode[1] <= 48 && weatherClouds) ||
@@ -226,31 +221,84 @@ function App() {
                 alt=""
               />
               <p className="maxmin">
-                28° <span>16°</span>
+                {clima.daily.temperature_2m_max[1]}°{" "}
+                <span>{clima.daily.temperature_2m_min[1]}°</span>
               </p>
             </div>
-
             <div className="day">
-              <h4 className="title">Sábado</h4>
-              <img src={weatherRain} alt="" />
+              <h4 className="title">
+                {dayjs(clima.daily.time[2]).format("dddd")}
+              </h4>
+              <img
+                src={
+                  (clima.daily.weathercode[2] === 0 && { weatherSun }) ||
+                  (clima.daily.weathercode[2] <= 3 && weatherCloudy) ||
+                  (clima.daily.weathercode[2] <= 48 && weatherClouds) ||
+                  (clima.daily.weathercode[2] <= 77 && weatherRain) ||
+                  (clima.daily.weathercode[2] <= 99 && weatherThunder)
+                }
+                alt=""
+              />
               <p className="maxmin">
-                20° <span>16°</span>
+                {clima.daily.temperature_2m_max[2]}°{" "}
+                <span>{clima.daily.temperature_2m_min[2]}°</span>
               </p>
             </div>
-
             <div className="day">
-              <h4 className="title">Domingo</h4>
-              <img src={weatherThunder} alt="" />
+              <h4 className="title">
+                {dayjs(clima.daily.time[3]).format("dddd")}
+              </h4>
+              <img
+                src={
+                  (clima.daily.weathercode[3] === 0 && { weatherSun }) ||
+                  (clima.daily.weathercode[3] <= 3 && weatherCloudy) ||
+                  (clima.daily.weathercode[3] <= 48 && weatherClouds) ||
+                  (clima.daily.weathercode[3] <= 77 && weatherRain) ||
+                  (clima.daily.weathercode[3] <= 99 && weatherThunder)
+                }
+                alt=""
+              />
               <p className="maxmin">
-                28° <span>26°</span>
+                {clima.daily.temperature_2m_max[3]}°{" "}
+                <span>{clima.daily.temperature_2m_min[3]}°</span>
               </p>
             </div>
-
             <div className="day">
-              <h4 className="title">Segunda</h4>
-              <img src={weatherCloudy} alt="" />
+              <h4 className="title">
+                {dayjs(clima.daily.time[4]).format("dddd")}
+              </h4>
+              <img
+                src={
+                  (clima.daily.weathercode[4] === 0 && { weatherSun }) ||
+                  (clima.daily.weathercode[4] <= 3 && weatherCloudy) ||
+                  (clima.daily.weathercode[4] <= 48 && weatherClouds) ||
+                  (clima.daily.weathercode[4] <= 77 && weatherRain) ||
+                  (clima.daily.weathercode[4] <= 99 && weatherThunder)
+                }
+                alt=""
+              />
               <p className="maxmin">
-                26° <span>20°</span>
+                {clima.daily.temperature_2m_max[4]}°{" "}
+                <span>{clima.daily.temperature_2m_min[4]}°</span>
+              </p>
+            </div>
+            <div className="day">
+              <h4 className="title">
+                {dayjs(clima.daily.time[5]).format("dddd")}
+              </h4>
+              <img
+                src={
+                  (clima.daily.weathercode[5] === 0 && { weatherSun }) ||
+                  (clima.daily.weathercode[5] <= 3 && weatherCloudy) ||
+                  (clima.daily.weathercode[5] <= 48 && weatherClouds) ||
+                  (clima.daily.weathercode[5] <= 77 && weatherRain) ||
+                  (clima.daily.weathercode[5] <= 99 && weatherThunder)
+                }
+                alt=""
+              />
+              <p className="maxmin">
+                {clima.daily.temperature_2m_max[5]}°{" "}
+                <span>{clima.daily.temperature_2m_min[5]}°</span>
               </p>
             </div>
           </section>
