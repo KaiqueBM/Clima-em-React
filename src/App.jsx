@@ -97,34 +97,34 @@ function App() {
 
   function themeDay() {
     const hoursAndMinutesFormat = hoursAndMinutes.split(":");
-    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13) {
-      const urlBg = `url(${bgDay}) no-repeat center/cover`;
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 14) {
+      const urlBg = `url(${bgAfternoon}) no-repeat center/cover`;
       return urlBg;
     }
-    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19) {
-      const urlBg = `url(${bgAfternoon}) no-repeat center/cover`;
+    if (hoursAndMinutesFormat[0] >= 14 && hoursAndMinutesFormat[0] < 19) {
+      const urlBg = `url(${bgDay}) no-repeat center/cover`;
       return urlBg;
     }
   }
 
   function themeBoxDay() {
     const hoursAndMinutesFormat = hoursAndMinutes.split(":");
-    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13) {
-      const urlBg = `url(${bgTempDay}) no-repeat center/cover`;
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 14) {
+      const urlBg = `url(${bgTempAfternoon}) no-repeat center/cover`;
       return urlBg;
     }
-    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19) {
-      const urlBg = `url(${bgTempAfternoon}) no-repeat center/cover`;
+    if (hoursAndMinutesFormat[0] >= 14 && hoursAndMinutesFormat[0] < 19) {
+      const urlBg = `url(${bgTempDay}) no-repeat center/cover`;
       return urlBg;
     }
   }
 
   function themeBoxColor() {
     const hoursAndMinutesFormat = hoursAndMinutes.split(":");
-    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13)
-      return "#bb9a86";
-    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19)
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 14)
       return "#0099e9";
+    if (hoursAndMinutesFormat[0] >= 14 && hoursAndMinutesFormat[0] < 19)
+      return "#bb9a86";
   }
 
   function weekFormat(day) {
