@@ -167,32 +167,36 @@ function App() {
                 Qualidade do ar
               </h2>
 
-              <p className="good">Boa</p>
-              <p className="number">21</p>
+              <p className="good">
+                {(air.hourly.us_aqi[0] <= 50 && "Boa") ||
+                  (air.hourly.us_aqi[0] < 100 && "Moderado") ||
+                  (air.hourly.us_aqi[0] < 150 && "Ruim")}
+              </p>
+              <p className="number">{air.hourly.us_aqi[0]}</p>
 
               <div className="info">
                 <div className="number">
-                  <p>12.9</p>
+                  <p>{air.hourly.pm2_5[0]}</p>
                   <small>PM2.5</small>
                 </div>
                 <div className="number">
-                  <p>12.9</p>
+                  <p>{air.hourly.pm10[0]}</p>
                   <small>PM10</small>
                 </div>
                 <div className="number">
-                  <p>2.1</p>
+                  <p>{air.hourly.sulphur_dioxide[0]}</p>
                   <small>SO₂</small>
                 </div>
                 <div className="number">
-                  <p>1.4</p>
+                  <p>{air.hourly.nitrogen_dioxide[0]}</p>
                   <small>NO₂</small>
                 </div>
                 <div className="number">
-                  <p>21.2</p>
+                  <p>{air.hourly.ozone[0]}</p>
                   <small>O₃</small>
                 </div>
                 <div className="number">
-                  <p>0.7</p>
+                  <p>{air.hourly.carbon_monoxide[0]}</p>
                   <small>CO</small>
                 </div>
               </div>
