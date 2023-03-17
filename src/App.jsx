@@ -1,9 +1,10 @@
 import "./App.css";
 import api from "./axios/api";
+import apiAir from "./axios/apiAir";
+
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
-import clouds from "./assets/clouds.svg";
 import leaf from "./assets/leaf.svg";
 import pin from "./assets/pin.svg";
 import sunChart from "./assets/sun-chart.svg";
@@ -29,6 +30,7 @@ const daysOfTheWeek = [
 
 function App() {
   const [clima, setClima] = useState();
+  const [air, setAir] = useState();
 
   useEffect(() => {
     api
@@ -41,7 +43,19 @@ function App() {
       });
   }, []);
 
-  console.log(clima);
+  useEffect(() => {
+    apiAir
+      .get(
+        "&timezone=America/Fortaleza&&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi"
+      )
+      .then((response) => setAir(response.data))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+  }, []);
+
+  //console.log(clima);
+  console.log(air);
 
   function setSunrise(sunrise) {
     const sunriseHour = sunrise[0].split("T");
@@ -82,8 +96,6 @@ function App() {
     const sunChart = Math.round((minutesFormat / sunsetInMinutes) * 100);
     return sunChart;
   }
-  const now = new Date();
-  const dayOfTheWeekToday = now.getDay();
 
   return (
     <div className="App">
@@ -146,42 +158,46 @@ function App() {
             </div>
           </section>
 
-          <section className="air-quality">
-            <h2 className="title">
-              <img src={leaf} alt="icone de folha de árvore" />
-              Qualidade do ar
-            </h2>
+          {!air ? (
+            <p>Carregando</p>
+          ) : (
+            <section className="air-quality">
+              <h2 className="title">
+                <img src={leaf} alt="icone de folha de árvore" />
+                Qualidade do ar
+              </h2>
 
-            <p className="good">Boa</p>
-            <p className="number">21</p>
+              <p className="good">Boa</p>
+              <p className="number">21</p>
 
-            <div className="info">
-              <div className="number">
-                <p>12.9</p>
-                <small>PM2.5</small>
+              <div className="info">
+                <div className="number">
+                  <p>12.9</p>
+                  <small>PM2.5</small>
+                </div>
+                <div className="number">
+                  <p>12.9</p>
+                  <small>PM10</small>
+                </div>
+                <div className="number">
+                  <p>2.1</p>
+                  <small>SO₂</small>
+                </div>
+                <div className="number">
+                  <p>1.4</p>
+                  <small>NO₂</small>
+                </div>
+                <div className="number">
+                  <p>21.2</p>
+                  <small>O₃</small>
+                </div>
+                <div className="number">
+                  <p>0.7</p>
+                  <small>CO</small>
+                </div>
               </div>
-              <div className="number">
-                <p>12.9</p>
-                <small>PM10</small>
-              </div>
-              <div className="number">
-                <p>2.1</p>
-                <small>SO₂</small>
-              </div>
-              <div className="number">
-                <p>1.4</p>
-                <small>NO₂</small>
-              </div>
-              <div className="number">
-                <p>21.2</p>
-                <small>O₃</small>
-              </div>
-              <div className="number">
-                <p>0.7</p>
-                <small>CO</small>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           <section className="sun-time">
             <h2 className="title">
