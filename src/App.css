@@ -15,7 +15,7 @@ body {
   font-size: 1.6rem;
 }
 
-main {
+.fundo {
   background: url(./assets/bg.jpeg) no-repeat center/cover;
   min-height: 100vh;
   display: grid;
@@ -24,10 +24,14 @@ main {
   gap: 2.4rem;
 }
 
-section {
+.fundo-box {
   background: #6d67d0;
   backdrop-filter: blur(1rem);
   border-radius: 1rem;
+}
+
+.fundo-box-temp {
+  background: url(./assets/bg-temp-now.jpeg);
 }
 
 .temperature-now-0,
@@ -35,7 +39,6 @@ section {
 .temperature-now-48,
 .temperature-now-77,
 .temperature-now-99 {
-  background: url(./assets/bg-temp-now.jpeg);
   position: relative;
   display: grid;
   grid-template-rows: max-content 1fr max-content;
@@ -99,9 +102,13 @@ section {
   gap: 0.4rem;
 }
 
+.location img {
+  color: white !important;
+}
+
 .location strong {
   font-size: 1.4rem;
-  color: #c2bff4;
+  color: #e7e6fb;
 }
 
 .temp {
@@ -144,7 +151,7 @@ section {
 .stats {
   flex: 1;
   padding: 1.2rem 1.6rem;
-  background: rgba(102, 96, 200, 0.6);
+  background: rgba(102, 96, 200, 1);
   border-radius: 0.6rem;
   display: flex;
   align-items: center;

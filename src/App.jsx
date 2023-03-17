@@ -18,15 +18,12 @@ import weatherRain from "./assets/weather-rain.svg";
 import weatherSun from "./assets/weather-sun.svg";
 import weatherThunder from "./assets/weather-thunder.svg";
 
-const daysOfTheWeek = [
-  "Domingo",
-  "Segunda",
-  "Terça",
-  "Quarta",
-  "Quinta",
-  "Sexta",
-  "Sábado",
-];
+import bgDay from "./assets/bgDay.png";
+import bgAfternoon from "./assets/bgAfternoon.png";
+import bgNight from "./assets/bgNight.png";
+import bgTempDay from "./assets/bgTempDay.png";
+import bgTempAfternoon from "./assets/bgTempAfternoon.png";
+import bgTempNight from "./assets/bgTempNight.png";
 
 function App() {
   const [clima, setClima] = useState();
@@ -55,7 +52,7 @@ function App() {
   }, []);
 
   //console.log(clima);
-  console.log(air);
+  //console.log(air);
 
   function setSunrise(sunrise) {
     const sunriseHour = sunrise[0].split("T");
@@ -97,20 +94,58 @@ function App() {
     return sunChart;
   }
 
+  function themeDay() {
+    const hoursAndMinutesFormat = hoursAndMinutes.split(":");
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13) {
+      const urlBg = `url(${bgDay}) no-repeat center/cover`;
+      return urlBg;
+    }
+    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19) {
+      const urlBg = `url(${bgAfternoon}) no-repeat center/cover`;
+      return urlBg;
+    }
+  }
+
+  function themeBoxDay() {
+    const hoursAndMinutesFormat = hoursAndMinutes.split(":");
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13) {
+      const urlBg = `url(${bgTempDay}) no-repeat center/cover`;
+      return urlBg;
+    }
+    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19) {
+      const urlBg = `url(${bgTempAfternoon}) no-repeat center/cover`;
+      return urlBg;
+    }
+  }
+
+  function themeBoxColor() {
+    const hoursAndMinutesFormat = hoursAndMinutes.split(":");
+    if (hoursAndMinutesFormat[0] >= 6 && hoursAndMinutesFormat[0] < 13)
+      return "#bb9a86";
+    if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19)
+      return "#0099e9";
+  }
+
   return (
     <div className="App">
       {!clima ? (
         <p>carregando</p>
       ) : (
-        <main>
+        <main className="fundo" style={{ background: themeDay() }}>
           <section
             className={
-              (clima.daily.weathercode[0] === 0 && "temperature-now-0") ||
-              (clima.daily.weathercode[0] <= 3 && "temperature-now-3") ||
-              (clima.daily.weathercode[0] <= 48 && "temperature-now-48") ||
-              (clima.daily.weathercode[0] <= 77 && "temperature-now-77") ||
-              (clima.daily.weathercode[0] <= 99 && "temperature-now-99")
+              (clima.daily.weathercode[0] === 0 &&
+                "temperature-now-0 fundo-box-temp") ||
+              (clima.daily.weathercode[0] <= 3 &&
+                "temperature-now-3 fundo-box-temp") ||
+              (clima.daily.weathercode[0] <= 48 &&
+                "temperature-now-48 fundo-box-temp") ||
+              (clima.daily.weathercode[0] <= 77 &&
+                "temperature-now-77 fundo-box-temp") ||
+              (clima.daily.weathercode[0] <= 99 &&
+                "temperature-now-99 fundo-box-temp")
             }
+            style={{ background: themeBoxDay() }}
           >
             <div className="location">
               <img src={pin} alt="icone de localizacao" />
@@ -127,7 +162,7 @@ function App() {
               <div className="celsius">°C</div>
             </div>
             <div className="statistics">
-              <div className="stats">
+              <div className="stats" style={{ background: themeBoxColor() }}>
                 <img src={tempWind} alt="icone de vento" />
                 <div className="info">
                   <p>Vento</p>
@@ -136,7 +171,7 @@ function App() {
                   </h5>
                 </div>
               </div>
-              <div className="stats">
+              <div className="stats" style={{ background: themeBoxColor() }}>
                 <img src={tempHumidity} alt="icone de umidade" />
                 <div className="info">
                   <p>Umidade</p>
@@ -145,7 +180,7 @@ function App() {
                   </h5>
                 </div>
               </div>
-              <div className="stats">
+              <div className="stats" style={{ background: themeBoxColor() }}>
                 <img src={tempRain} alt="icone de chuva" />
                 <div className="info">
                   <p>Chuva</p>
@@ -161,7 +196,10 @@ function App() {
           {!air ? (
             <p>Carregando</p>
           ) : (
-            <section className="air-quality">
+            <section
+              className="fundo-box air-quality"
+              style={{ background: themeBoxColor() }}
+            >
               <h2 className="title">
                 <img src={leaf} alt="icone de folha de árvore" />
                 Qualidade do ar
@@ -203,7 +241,10 @@ function App() {
             </section>
           )}
 
-          <section className="sun-time">
+          <section
+            className="fundo-box sun-time"
+            style={{ background: themeBoxColor() }}
+          >
             <h2 className="title">
               <img src={sunTime} alt="icone de um sol com um relógio dentro" />
               Horário do sol
@@ -228,7 +269,10 @@ function App() {
             </div>
           </section>
 
-          <section className="week-weather">
+          <section
+            className="fundo-box week-weather"
+            style={{ background: themeBoxColor() }}
+          >
             <div className="day">
               <h4 className="title">Amanhã</h4>
               <img
