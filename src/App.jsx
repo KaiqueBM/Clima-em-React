@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     api
       .get(
-        "hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_180m&timezone=America/Fortaleza&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset"
+        "&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_180m&timezone=America/Fortaleza&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max"
       )
       .then((response) => setClima(response.data))
       .catch((err) => {
@@ -120,7 +120,7 @@ function App() {
                 <div className="info">
                   <p>Vento</p>
                   <h5>
-                    17 <span>km/h</span>
+                    {clima.current_weather.windspeed} <span>km/h</span>
                   </h5>
                 </div>
               </div>
@@ -129,7 +129,7 @@ function App() {
                 <div className="info">
                   <p>Umidade</p>
                   <h5>
-                    31 <span>%</span>
+                    {clima.hourly.relativehumidity_2m[0]} <span>%</span>
                   </h5>
                 </div>
               </div>
@@ -138,7 +138,8 @@ function App() {
                 <div className="info">
                   <p>Chuva</p>
                   <h5>
-                    10 <span>%</span>
+                    {clima.daily.precipitation_probability_max[0]}{" "}
+                    <span>%</span>
                   </h5>
                 </div>
               </div>
