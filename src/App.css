@@ -322,6 +322,7 @@ time.now {
 h4.title {
   font-size: 1.4rem;
   color: #dad8f7;
+  text-transform: capitalize;
 }
 
 .day .maxmin {

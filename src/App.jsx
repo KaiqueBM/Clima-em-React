@@ -4,6 +4,7 @@ import apiAir from "./axios/apiAir";
 
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import "./lib/dayjs";
 
 import leaf from "./assets/leaf.svg";
 import pin from "./assets/pin.svg";
@@ -124,6 +125,11 @@ function App() {
       return "#bb9a86";
     if (hoursAndMinutesFormat[0] >= 13 && hoursAndMinutesFormat[0] < 19)
       return "#0099e9";
+  }
+
+  function weekFormat(day) {
+    const dayFormat = day.split("-");
+    return dayFormat[0];
   }
 
   return (
@@ -292,7 +298,7 @@ function App() {
             </div>
             <div className="day">
               <h4 className="title">
-                {dayjs(clima.daily.time[2]).format("dddd")}
+                {weekFormat(dayjs(clima.daily.time[2]).format("dddd"))}
               </h4>
               <img
                 src={
@@ -311,7 +317,7 @@ function App() {
             </div>
             <div className="day">
               <h4 className="title">
-                {dayjs(clima.daily.time[3]).format("dddd")}
+                {weekFormat(dayjs(clima.daily.time[3]).format("dddd"))}
               </h4>
               <img
                 src={
@@ -330,7 +336,7 @@ function App() {
             </div>
             <div className="day">
               <h4 className="title">
-                {dayjs(clima.daily.time[4]).format("dddd")}
+                {weekFormat(dayjs(clima.daily.time[4]).format("dddd"))}
               </h4>
               <img
                 src={
@@ -349,7 +355,7 @@ function App() {
             </div>
             <div className="day">
               <h4 className="title">
-                {dayjs(clima.daily.time[5]).format("dddd")}
+                {weekFormat(dayjs(clima.daily.time[5]).format("dddd"))}
               </h4>
               <img
                 src={
