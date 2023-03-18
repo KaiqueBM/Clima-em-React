@@ -2,7 +2,7 @@ import "./App.css";
 import api from "./axios/api";
 import apiAir from "./axios/apiAir";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import "./lib/dayjs";
 
@@ -26,36 +26,17 @@ import bgTempDay from "./assets/bgTempDay.png";
 import bgTempAfternoon from "./assets/bgTempAfternoon.png";
 import bgTempNight from "./assets/bgTempNight.png";
 
+
+import { WeatherContext } from "./context/WeatherContext";
+import { AirContext } from "./context/AirContext";
+
 const arrayNumbers = [1,2,3,4,5]
 
+
 function App() {
-  const [clima, setClima] = useState();
-  const [air, setAir] = useState();
 
-  useEffect(() => {
-    api
-      .get(
-        "&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_180m&timezone=America/Fortaleza&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max"
-      )
-      .then((response) => setClima(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
-  }, []);
-
-  useEffect(() => {
-    apiAir
-      .get(
-        "&timezone=America/Fortaleza&&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi"
-      )
-      .then((response) => setAir(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
-      });
-  }, []);
-
-  //console.log(clima);
-  //console.log(air);
+  const { weather, setWeather } = useContext(WeatherContext);
+  const { air, setAir } = useContext(AirContext);
 
   function setSunrise(sunrise) {
     const sunriseHour = sunrise[0].split("T");
@@ -139,21 +120,21 @@ function App() {
 
   return (
     <div className="App">
-      {!clima ? (
+      {!weather ? (
         <p>carregando</p>
       ) : (
         <main className="fundo" style={{ background: themeDay() }}>
           <section
             className={
-              (clima.daily.weathercode[0] === 0 &&
+              (weather.daily.weathercode[0] === 0 &&
                 "temperature-now-0 fundo-box-temp") ||
-              (clima.daily.weathercode[0] <= 3 &&
+              (weather.daily.weathercode[0] <= 3 &&
                 "temperature-now-3 fundo-box-temp") ||
-              (clima.daily.weathercode[0] <= 48 &&
+              (weather.daily.weathercode[0] <= 48 &&
                 "temperature-now-48 fundo-box-temp") ||
-              (clima.daily.weathercode[0] <= 77 &&
+              (weather.daily.weathercode[0] <= 77 &&
                 "temperature-now-77 fundo-box-temp") ||
-              (clima.daily.weathercode[0] <= 99 &&
+              (weather.daily.weathercode[0] <= 99 &&
                 "temperature-now-99 fundo-box-temp")
             }
             style={{ background: themeBoxDay() }}
@@ -164,10 +145,10 @@ function App() {
             </div>
             <div className="temp">
               <div className="number">
-                {clima.current_weather.temperature}
+                {weather.current_weather.temperature}
                 <div className="maxmin">
-                  {clima.daily.temperature_2m_max[0]}°{" "}
-                  <span>{clima.daily.temperature_2m_min[0]}° </span>
+                  {weather.daily.temperature_2m_max[0]}°{" "}
+                  <span>{weather.daily.temperature_2m_min[0]}° </span>
                 </div>
               </div>
               <div className="celsius">°C</div>
@@ -178,7 +159,7 @@ function App() {
                 <div className="info">
                   <p>Vento</p>
                   <h5>
-                    {clima.current_weather.windspeed} <span>km/h</span>
+                    {weather.current_weather.windspeed} <span>km/h</span>
                   </h5>
                 </div>
               </div>
@@ -187,7 +168,7 @@ function App() {
                 <div className="info">
                   <p>Umidade</p>
                   <h5>
-                    {clima.hourly.relativehumidity_2m[0]} <span>%</span>
+                    {weather.hourly.relativehumidity_2m[0]} <span>%</span>
                   </h5>
                 </div>
               </div>
@@ -196,7 +177,7 @@ function App() {
                 <div className="info">
                   <p>Chuva</p>
                   <h5>
-                    {clima.daily.precipitation_probability_max[0]}{" "}
+                    {weather.daily.precipitation_probability_max[0]}{" "}
                     <span>%</span>
                   </h5>
                 </div>
@@ -275,8 +256,8 @@ function App() {
               </div>
             </div>
             <div className="time">
-              <time className="sunrise">{setSunrise(clima.daily.sunrise)}</time>
-              <time className="sunset">{setSunset(clima.daily.sunset)}</time>
+              <time className="sunrise">{setSunrise(weather.daily.sunrise)}</time>
+              <time className="sunset">{setSunset(weather.daily.sunset)}</time>
             </div>
           </section>
 
@@ -288,21 +269,21 @@ function App() {
                 {arrayNumbers.map((number, index)=>(
                   <div className="day" key={index}>
               <h4 className="title">
-                {weekFormat(dayjs(clima.daily.time[number]).format("dddd"))}
+                {weekFormat(dayjs(weather.daily.time[number]).format("dddd"))}
               </h4>
               <img
                 src={
-                  (clima.daily.weathercode[number] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[number] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[number] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[number] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[number] <= 99 && weatherThunder)
+                  (weather.daily.weathercode[number] === 0 && { weatherSun }) ||
+                  (weather.daily.weathercode[number] <= 3 && weatherCloudy) ||
+                  (weather.daily.weathercode[number] <= 48 && weatherClouds) ||
+                  (weather.daily.weathercode[number] <= 77 && weatherRain) ||
+                  (weather.daily.weathercode[number] <= 99 && weatherThunder)
                 }
                 alt=""
               />
               <p className="maxmin">
-                {clima.daily.temperature_2m_max[number]}°{" "}
-                <span>{clima.daily.temperature_2m_min[number]}°</span>
+                {weather.daily.temperature_2m_max[number]}°{" "}
+                <span>{weather.daily.temperature_2m_min[number]}°</span>
               </p>
             </div>
                 ))
