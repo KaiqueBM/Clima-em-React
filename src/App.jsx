@@ -26,6 +26,8 @@ import bgTempDay from "./assets/bgTempDay.png";
 import bgTempAfternoon from "./assets/bgTempAfternoon.png";
 import bgTempNight from "./assets/bgTempNight.png";
 
+const arrayNumbers = [1,2,3,4,5]
+
 function App() {
   const [clima, setClima] = useState();
   const [air, setAir] = useState();
@@ -282,99 +284,31 @@ function App() {
             className="fundo-box week-weather"
             style={{ background: themeBoxColor() }}
           >
-            <div className="day">
-              <h4 className="title">Amanhã</h4>
-              <img
-                src={
-                  (clima.daily.weathercode[1] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[1] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[1] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[1] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[1] <= 99 && weatherThunder)
-                }
-                alt=""
-              />
-              <p className="maxmin">
-                {clima.daily.temperature_2m_max[1]}°{" "}
-                <span>{clima.daily.temperature_2m_min[1]}°</span>
-              </p>
-            </div>
-            <div className="day">
+
+                {arrayNumbers.map((number, index)=>(
+                  <div className="day" key={index}>
               <h4 className="title">
-                {weekFormat(dayjs(clima.daily.time[2]).format("dddd"))}
+                {weekFormat(dayjs(clima.daily.time[number]).format("dddd"))}
               </h4>
               <img
                 src={
-                  (clima.daily.weathercode[2] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[2] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[2] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[2] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[2] <= 99 && weatherThunder)
+                  (clima.daily.weathercode[number] === 0 && { weatherSun }) ||
+                  (clima.daily.weathercode[number] <= 3 && weatherCloudy) ||
+                  (clima.daily.weathercode[number] <= 48 && weatherClouds) ||
+                  (clima.daily.weathercode[number] <= 77 && weatherRain) ||
+                  (clima.daily.weathercode[number] <= 99 && weatherThunder)
                 }
                 alt=""
               />
               <p className="maxmin">
-                {clima.daily.temperature_2m_max[2]}°{" "}
-                <span>{clima.daily.temperature_2m_min[2]}°</span>
+                {clima.daily.temperature_2m_max[number]}°{" "}
+                <span>{clima.daily.temperature_2m_min[number]}°</span>
               </p>
             </div>
-            <div className="day">
-              <h4 className="title">
-                {weekFormat(dayjs(clima.daily.time[3]).format("dddd"))}
-              </h4>
-              <img
-                src={
-                  (clima.daily.weathercode[3] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[3] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[3] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[3] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[3] <= 99 && weatherThunder)
+                ))
+
                 }
-                alt=""
-              />
-              <p className="maxmin">
-                {clima.daily.temperature_2m_max[3]}°{" "}
-                <span>{clima.daily.temperature_2m_min[3]}°</span>
-              </p>
-            </div>
-            <div className="day">
-              <h4 className="title">
-                {weekFormat(dayjs(clima.daily.time[4]).format("dddd"))}
-              </h4>
-              <img
-                src={
-                  (clima.daily.weathercode[4] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[4] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[4] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[4] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[4] <= 99 && weatherThunder)
-                }
-                alt=""
-              />
-              <p className="maxmin">
-                {clima.daily.temperature_2m_max[4]}°{" "}
-                <span>{clima.daily.temperature_2m_min[4]}°</span>
-              </p>
-            </div>
-            <div className="day">
-              <h4 className="title">
-                {weekFormat(dayjs(clima.daily.time[5]).format("dddd"))}
-              </h4>
-              <img
-                src={
-                  (clima.daily.weathercode[5] === 0 && { weatherSun }) ||
-                  (clima.daily.weathercode[5] <= 3 && weatherCloudy) ||
-                  (clima.daily.weathercode[5] <= 48 && weatherClouds) ||
-                  (clima.daily.weathercode[5] <= 77 && weatherRain) ||
-                  (clima.daily.weathercode[5] <= 99 && weatherThunder)
-                }
-                alt=""
-              />
-              <p className="maxmin">
-                {clima.daily.temperature_2m_max[5]}°{" "}
-                <span>{clima.daily.temperature_2m_min[5]}°</span>
-              </p>
-            </div>
+
           </section>
         </main>
       )}
