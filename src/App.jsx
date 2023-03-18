@@ -91,7 +91,10 @@ function App() {
     let sunsetInMinutes = 1825 * 60;
     minutesFormat -= sunriseInMinutes;
     sunsetInMinutes -= sunriseInMinutes;
-    const sunChart = Math.round((minutesFormat / sunsetInMinutes) * 100);
+    let sunChart = Math.round((minutesFormat / sunsetInMinutes) * 100);
+    if(sunChart > 100){
+      sunChart = 100
+    }
     return sunChart;
   }
 
