@@ -15,7 +15,7 @@ import TodayWeather from "./components/TodayWeather";
 
 function App() {
 
-  const { weather, setWeather } = useContext(WeatherContext);
+  const { weather, setWeather, latitude, longitude } = useContext(WeatherContext);
   const { air, setAir } = useContext(AirContext);
 
   const [hoursAndMinutes, setHoursAndMinutes] = useState(
@@ -55,7 +55,7 @@ function App() {
       ) : (
         <main className="fundo" style={{ background: themeDay() }}>
           
-          <TodayWeather weather={weather} hoursAndMinutes={hoursAndMinutes} />
+          <TodayWeather weather={weather} hoursAndMinutes={hoursAndMinutes} latitude={latitude} longitude={longitude} />
 
           {!air ? (
             <p>Carregando</p>

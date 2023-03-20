@@ -6,7 +6,7 @@ import pin from "../assets/pin.svg";
 import bgTempDay from "../assets/bgTempDay.png";
 import bgTempAfternoon from "../assets/bgTempAfternoon.png";
 
-const TodayWeather = ({weather, hoursAndMinutes}) => {
+const TodayWeather = ({weather, hoursAndMinutes, latitude, longitude}) => {
 
 
 	function themeBoxDay() {
@@ -47,7 +47,7 @@ const TodayWeather = ({weather, hoursAndMinutes}) => {
           >
             <div className="location">
               <img src={pin} alt="icone de localizacao" />
-              <strong>São Paulo, SP</strong>
+              <strong>{latitude === -23.565414759900598 && ("São Paulo, SP") || (`${latitude} | ${longitude}`) }</strong>
             </div>
             <div className="temp">
               <div className="number">
