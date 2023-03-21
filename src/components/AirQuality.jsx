@@ -23,7 +23,8 @@ const AirQuality = ({air, hoursAndMinutes}) => {
               <p className="good">
                 {(air.hourly.us_aqi[0] <= 50 && "Boa") ||
                   (air.hourly.us_aqi[0] < 100 && "Moderado") ||
-                  (air.hourly.us_aqi[0] < 150 && "Ruim")}
+                  (air.hourly.us_aqi[0] < 150 && "Ruim") ||
+                  ("Péssimo")} 
               </p>
               <p className="number">{air.hourly.us_aqi[0]}</p>
 
